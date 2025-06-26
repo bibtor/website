@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .font-heading {
+    font-family: Recoleta, "Noto Serif", Georgia, Times New Roman, Times, serif;
+  }
+}
+
 body {
   @apply bg-white text-gray-900 font-sans;
 }
