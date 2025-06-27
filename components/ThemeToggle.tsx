@@ -17,7 +17,7 @@ export const ThemeToggle: React.FC = () => {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="fixed top-6 right-6 p-3 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200 shadow-lg"
+      className="fixed top-6 right-6 p-3"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       aria-label="Toggle theme"
@@ -29,9 +29,9 @@ export const ThemeToggle: React.FC = () => {
         transition={{ duration: 0.3 }}
       >
         {resolvedTheme === "dark" ? (
-          <Sun className="w-5 h-5 text-yellow-500" />
+          <Sun className="w-5 h-5" style={{ color: "#e8e8e8" }} />
         ) : (
-          <Moon className="w-5 h-5 text-gray-700" />
+          <Moon className="w-5 h-5" style={{ color: "#181818" }} />
         )}
       </motion.div>
     </motion.button>

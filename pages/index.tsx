@@ -9,6 +9,7 @@ export default function Home() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [isHovered, setIsHovered] = useState(false);
   const [isAvatarHovered, setIsAvatarHovered] = useState(false);
+  const [isMinesquadHovered, setIsMinesquadHovered] = useState(false);
 
   const iconVariants = {
     initial: {
@@ -36,46 +37,70 @@ export default function Home() {
 
       <div className="max-w-[640px] mx-auto p-8 min-h-screen flex flex-col justify-center">
         <motion.div
-          className="flex flex-col items-start gap-4 sm:flex-row sm:items-center mb-4"
+          className="flex flex-col items-start gap-4 sm:flex-row sm:items-center mb-12"
           onHoverStart={() => setIsAvatarHovered(true)}
           onHoverEnd={() => setIsAvatarHovered(false)}
         >
-          <motion.h3
-            className="text-5xl font-bold font-heading"
+          <motion.p
+            className="text-lg text-gray-600 dark:text-gray-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
           >
             Hi, I'm Charles
-          </motion.h3>
+          </motion.p>
           <motion.div
-            className="w-12 h-12 rounded-sm shadow-lg sm:ml-4"
+            className="w-12 h-12 rounded-full shadow-lg sm:ml-4"
             initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
             animate={{
               opacity: 1,
               scale: 1,
               rotate: isAvatarHovered ? 183 : 3,
             }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             <Image
               src="/avatar.jpeg"
               alt="Charles Binet's avatar"
               width={48}
               height={48}
-              className="rounded-sm"
+              className="rounded-full"
             />
           </motion.div>
         </motion.div>
 
-        <motion.p
-          className="text-lg text-gray-600 dark:text-gray-300 mb-12"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+        <motion.div
+          className="flex flex-col items-start gap-4 sm:flex-row sm:items-center mb-12"
+          onHoverStart={() => setIsMinesquadHovered(true)}
+          onHoverEnd={() => setIsMinesquadHovered(false)}
         >
-          I build stuff.
-        </motion.p>
+          <motion.p
+            className="text-lg text-gray-600 dark:text-gray-300"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            I build stuff.
+          </motion.p>
+          <motion.div
+            className="w-12 h-12 rounded-xl shadow-lg sm:ml-4"
+            initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              rotate: isMinesquadHovered ? 0 : -3,
+            }}
+            transition={{ duration: 0.1, ease: "easeInOut" }}
+          >
+            <Image
+              src="/minesquad.png"
+              alt="Minesquad"
+              width={48}
+              height={48}
+              className="rounded-xl"
+            />
+          </motion.div>
+        </motion.div>
 
         <motion.div
           className="flex flex-col items-start gap-4 sm:flex-row sm:items-center group"
@@ -105,7 +130,7 @@ export default function Home() {
               href="https://www.linkedin.com/in/charles-binet/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-200 ease-out 
+              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out 
                          mr-1 md:-mr-[3px] md:group-hover:mr-1"
               style={{ backgroundColor: "#0B66C2" }}
               custom={{ rotate: -3 }}
@@ -120,7 +145,7 @@ export default function Home() {
               href="https://dribbble.com/charles_b"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-200 ease-out
+              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1"
               style={{ backgroundColor: "#EA4C89" }}
               custom={{ rotate: 4 }}
@@ -135,7 +160,7 @@ export default function Home() {
               href="https://github.com/bibtor"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-200 ease-out
+              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          ml-1 md:-ml-[3px] md:group-hover:ml-1"
               style={{ backgroundColor: "#5C6BC0" }}
               custom={{ rotate: -2 }}
