@@ -152,7 +152,10 @@ export default function Home() {
             initial="initial"
             animate="animate"
           >
-            <motion.div
+            <motion.a
+              href="https://depict.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out 
                          mr-1 md:-mr-[3px] md:group-hover:mr-1 relative"
               custom={{ rotate: 4 }}
@@ -178,9 +181,12 @@ export default function Home() {
                   Depict AI
                 </div>
               )}
-            </motion.div>
+            </motion.a>
 
-            <motion.div
+            <motion.a
+              href="https://validio.io/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               custom={{ rotate: -2 }}
@@ -206,9 +212,12 @@ export default function Home() {
                   Validio
                 </div>
               )}
-            </motion.div>
+            </motion.a>
 
-            <motion.div
+            <motion.a
+              href="https://www.linkedin.com/company/curb-food/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 rounded-md flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               style={{ backgroundColor: "#CE4129" }}
@@ -235,9 +244,12 @@ export default function Home() {
                   Curb Food
                 </div>
               )}
-            </motion.div>
+            </motion.a>
 
-            <motion.div
+            <motion.a
+              href="https://www.zettle.com/se"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               custom={{ rotate: 2 }}
@@ -263,9 +275,12 @@ export default function Home() {
                   Zettle by PayPal
                 </div>
               )}
-            </motion.div>
+            </motion.a>
 
-            <motion.div
+            <motion.a
+              href="https://daresay.co/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 rounded-md flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          ml-1 md:-ml-[3px] md:group-hover:ml-1 relative"
               style={{ backgroundColor: "#ffffff" }}
@@ -292,7 +307,7 @@ export default function Home() {
                   Daresay
                 </div>
               )}
-            </motion.div>
+            </motion.a>
           </motion.div>
         </motion.div>
 
