@@ -12,6 +12,9 @@ export default function Home() {
   const [isMinesquadHovered, setIsMinesquadHovered] = useState(false);
   const [isWorkHovered, setIsWorkHovered] = useState(false);
 
+  // Tooltip states for individual icons
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+
   const iconVariants = {
     initial: {
       opacity: 0,
@@ -51,7 +54,7 @@ export default function Home() {
             Hi, I'm Charles
           </motion.p>
           <motion.div
-            className="w-12 h-12 rounded-full shadow-lg sm:ml-4"
+            className="w-12 h-12 rounded-full shadow-lg sm:ml-4 relative"
             initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
             animate={{
               opacity: 1,
@@ -59,6 +62,8 @@ export default function Home() {
               rotate: isAvatarHovered ? 183 : 3,
             }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
+            onHoverStart={() => setHoveredIcon("avatar")}
+            onHoverEnd={() => setHoveredIcon(null)}
           >
             <Image
               src="/avatar.jpeg"
@@ -67,6 +72,15 @@ export default function Home() {
               height={48}
               className="rounded-full"
             />
+            {hoveredIcon === "avatar" && (
+              <div
+                className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                             bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                             px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+              >
+                Heyyy!
+              </div>
+            )}
           </motion.div>
         </motion.div>
 
@@ -84,7 +98,7 @@ export default function Home() {
             I build stuff.
           </motion.p>
           <motion.div
-            className="w-12 h-12 rounded-xl shadow-lg sm:ml-4"
+            className="w-12 h-12 rounded-xl shadow-lg sm:ml-4 relative"
             initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
             animate={{
               opacity: 1,
@@ -92,6 +106,8 @@ export default function Home() {
               rotate: isMinesquadHovered ? 0 : -3,
             }}
             transition={{ duration: 0.1, ease: "easeInOut" }}
+            onHoverStart={() => setHoveredIcon("minesquad")}
+            onHoverEnd={() => setHoveredIcon(null)}
           >
             <Image
               src="/minesquad.png"
@@ -100,6 +116,15 @@ export default function Home() {
               height={48}
               className="rounded-xl"
             />
+            {hoveredIcon === "minesquad" && (
+              <div
+                className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                             bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                             px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+              >
+                Minesquad - A giveback game
+              </div>
+            )}
           </motion.div>
         </motion.div>
 
@@ -129,11 +154,13 @@ export default function Home() {
           >
             <motion.div
               className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out 
-                         mr-1 md:-mr-[3px] md:group-hover:mr-1"
+                         mr-1 md:-mr-[3px] md:group-hover:mr-1 relative"
               custom={{ rotate: 4 }}
               variants={iconVariants}
               transition={iconTransition}
               animate={isWorkHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("depict")}
+              onHoverEnd={() => setHoveredIcon(null)}
             >
               <Image
                 src="/depict.jpg"
@@ -142,15 +169,26 @@ export default function Home() {
                 height={48}
                 className="rounded-md"
               />
+              {hoveredIcon === "depict" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  Depict AI
+                </div>
+              )}
             </motion.div>
 
             <motion.div
               className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out
-                         mx-1 md:-mx-[3px] md:group-hover:mx-1"
+                         mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               custom={{ rotate: -2 }}
               variants={iconVariants}
               transition={iconTransition}
               animate={isWorkHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("validio")}
+              onHoverEnd={() => setHoveredIcon(null)}
             >
               <Image
                 src="/validio.png"
@@ -159,16 +197,27 @@ export default function Home() {
                 height={48}
                 className="rounded-md"
               />
+              {hoveredIcon === "validio" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  Validio
+                </div>
+              )}
             </motion.div>
 
             <motion.div
               className="w-12 h-12 rounded-md flex items-center justify-center shadow-lg transition-all duration-100 ease-out
-                         mx-1 md:-mx-[3px] md:group-hover:mx-1"
+                         mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               style={{ backgroundColor: "#CE4129" }}
               custom={{ rotate: -3 }}
               variants={iconVariants}
               transition={iconTransition}
               animate={isWorkHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("curb")}
+              onHoverEnd={() => setHoveredIcon(null)}
             >
               <Image
                 src="/curb.png"
@@ -177,15 +226,26 @@ export default function Home() {
                 height={32}
                 className="rounded-sm"
               />
+              {hoveredIcon === "curb" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  Curb Food
+                </div>
+              )}
             </motion.div>
 
             <motion.div
               className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out
-                         ml-1 md:-ml-[3px] md:group-hover:ml-1"
+                         mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               custom={{ rotate: 2 }}
               variants={iconVariants}
               transition={iconTransition}
               animate={isWorkHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("zettle")}
+              onHoverEnd={() => setHoveredIcon(null)}
             >
               <Image
                 src="/zettle.png"
@@ -194,6 +254,44 @@ export default function Home() {
                 height={48}
                 className="rounded-md"
               />
+              {hoveredIcon === "zettle" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  Zettle by PayPal
+                </div>
+              )}
+            </motion.div>
+
+            <motion.div
+              className="w-12 h-12 rounded-md flex items-center justify-center shadow-lg transition-all duration-100 ease-out
+                         ml-1 md:-ml-[3px] md:group-hover:ml-1 relative"
+              style={{ backgroundColor: "#ffffff" }}
+              custom={{ rotate: -1 }}
+              variants={iconVariants}
+              transition={iconTransition}
+              animate={isWorkHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("daresay")}
+              onHoverEnd={() => setHoveredIcon(null)}
+            >
+              <Image
+                src="/daresay.png"
+                alt="Daresay"
+                width={22}
+                height={22}
+                className="rounded-sm"
+              />
+              {hoveredIcon === "daresay" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  Daresay
+                </div>
+              )}
             </motion.div>
           </motion.div>
         </motion.div>
@@ -227,14 +325,25 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out 
-                         mr-1 md:-mr-[3px] md:group-hover:mr-1"
+                         mr-1 md:-mr-[3px] md:group-hover:mr-1 relative"
               style={{ backgroundColor: "#0B66C2" }}
               custom={{ rotate: -3 }}
               variants={iconVariants}
               transition={iconTransition}
               animate={isHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("linkedin")}
+              onHoverEnd={() => setHoveredIcon(null)}
             >
               <Linkedin className="w-6 h-6 text-white" />
+              {hoveredIcon === "linkedin" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  @charles-binet
+                </div>
+              )}
             </motion.a>
 
             <motion.a
@@ -242,14 +351,25 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out
-                         mx-1 md:-mx-[3px] md:group-hover:mx-1"
+                         mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               style={{ backgroundColor: "#EA4C89" }}
               custom={{ rotate: 4 }}
               variants={iconVariants}
               transition={iconTransition}
               animate={isHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("dribbble")}
+              onHoverEnd={() => setHoveredIcon(null)}
             >
               <Dribbble className="w-6 h-6 text-white" />
+              {hoveredIcon === "dribbble" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  @charles_b
+                </div>
+              )}
             </motion.a>
 
             <motion.a
@@ -257,14 +377,25 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out
-                         ml-1 md:-ml-[3px] md:group-hover:ml-1"
+                         ml-1 md:-ml-[3px] md:group-hover:ml-1 relative"
               style={{ backgroundColor: "#5C6BC0" }}
               custom={{ rotate: -2 }}
               variants={iconVariants}
               transition={iconTransition}
               animate={isHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("github")}
+              onHoverEnd={() => setHoveredIcon(null)}
             >
               <Github className="w-6 h-6 text-white" />
+              {hoveredIcon === "github" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  @bibtor
+                </div>
+              )}
             </motion.a>
           </motion.div>
         </motion.div>
