@@ -15,6 +15,41 @@ export default function Home() {
   // Tooltip states for individual icons
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
 
+  // Email interaction states
+  const [isEmailRevealed, setIsEmailRevealed] = useState(false);
+  const [isEmailCopied, setIsEmailCopied] = useState(false);
+  const [isEmailHovered, setIsEmailHovered] = useState(false);
+
+  const handleEmailClick = async () => {
+    if (!isDesktop && !isEmailRevealed) {
+      // Mobile: first tap reveals email
+      setIsEmailRevealed(true);
+    } else {
+      // Desktop click or mobile second tap: copy to clipboard
+      try {
+        await navigator.clipboard.writeText("charlesbinet@proton.me");
+        setIsEmailCopied(true);
+        setTimeout(() => setIsEmailCopied(false), 2000);
+      } catch (err) {
+        console.error("Failed to copy email:", err);
+      }
+    }
+  };
+
+  const handleEmailHover = () => {
+    if (isDesktop) {
+      setIsEmailRevealed(true);
+      setIsEmailHovered(true);
+    }
+  };
+
+  const handleEmailLeave = () => {
+    if (isDesktop) {
+      setIsEmailHovered(false);
+      setIsEmailRevealed(false);
+    }
+  };
+
   const iconVariants = {
     initial: {
       opacity: 0,
@@ -156,7 +191,7 @@ export default function Home() {
               href="https://depict.ai/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out 
+              className="w-12 h-12 rounded-xl shadow-lg transition-all duration-100 ease-out 
                          mr-1 md:-mr-[3px] md:group-hover:mr-1 relative"
               custom={{ rotate: 4 }}
               variants={iconVariants}
@@ -170,7 +205,7 @@ export default function Home() {
                 alt="Depict"
                 width={48}
                 height={48}
-                className="rounded-md"
+                className="rounded-xl"
               />
               {hoveredIcon === "depict" && (
                 <div
@@ -187,7 +222,7 @@ export default function Home() {
               href="https://validio.io/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out
+              className="w-12 h-12 rounded-xl shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               custom={{ rotate: -2 }}
               variants={iconVariants}
@@ -201,7 +236,7 @@ export default function Home() {
                 alt="Validio"
                 width={48}
                 height={48}
-                className="rounded-md"
+                className="rounded-xl"
               />
               {hoveredIcon === "validio" && (
                 <div
@@ -218,7 +253,7 @@ export default function Home() {
               href="https://www.linkedin.com/company/curb-food/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-md flex items-center justify-center shadow-lg transition-all duration-100 ease-out
+              className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               style={{ backgroundColor: "#CE4129" }}
               custom={{ rotate: -3 }}
@@ -233,7 +268,7 @@ export default function Home() {
                 alt="Curb"
                 width={32}
                 height={32}
-                className="rounded-sm"
+                className="rounded-xl"
               />
               {hoveredIcon === "curb" && (
                 <div
@@ -250,7 +285,7 @@ export default function Home() {
               href="https://www.zettle.com/se"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-md shadow-lg transition-all duration-100 ease-out
+              className="w-12 h-12 rounded-xl shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               custom={{ rotate: 2 }}
               variants={iconVariants}
@@ -264,7 +299,7 @@ export default function Home() {
                 alt="Zettle"
                 width={48}
                 height={48}
-                className="rounded-md"
+                className="rounded-xl"
               />
               {hoveredIcon === "zettle" && (
                 <div
@@ -281,9 +316,9 @@ export default function Home() {
               href="https://daresay.co/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-md flex items-center justify-center shadow-lg transition-all duration-100 ease-out
+              className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          ml-1 md:-ml-[3px] md:group-hover:ml-1 relative"
-              style={{ backgroundColor: "#ffffff" }}
+              style={{ backgroundColor: "#000000" }}
               custom={{ rotate: -1 }}
               variants={iconVariants}
               transition={iconTransition}
@@ -296,7 +331,7 @@ export default function Home() {
                 alt="Daresay"
                 width={22}
                 height={22}
-                className="rounded-sm"
+                style={{ filter: "invert(1)" }}
               />
               {hoveredIcon === "daresay" && (
                 <div
@@ -339,7 +374,7 @@ export default function Home() {
               href="https://www.linkedin.com/in/charles-binet/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out 
+              className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-100 ease-out 
                          mr-1 md:-mr-[3px] md:group-hover:mr-1 relative"
               style={{ backgroundColor: "#0B66C2" }}
               custom={{ rotate: -3 }}
@@ -365,7 +400,7 @@ export default function Home() {
               href="https://dribbble.com/charles_b"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out
+              className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          mx-1 md:-mx-[3px] md:group-hover:mx-1 relative"
               style={{ backgroundColor: "#EA4C89" }}
               custom={{ rotate: 4 }}
@@ -391,7 +426,7 @@ export default function Home() {
               href="https://github.com/bibtor"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-sm flex items-center justify-center shadow-lg transition-all duration-100 ease-out
+              className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-100 ease-out
                          ml-1 md:-ml-[3px] md:group-hover:ml-1 relative"
               style={{ backgroundColor: "#5C6BC0" }}
               custom={{ rotate: -2 }}
@@ -414,6 +449,78 @@ export default function Home() {
             </motion.a>
           </motion.div>
         </motion.div>
+
+        {/* Line divider */}
+        <motion.hr
+          className="w-full border-t border-gray-300 dark:border-gray-600 mt-16 mb-8 ml-0"
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          style={{ transformOrigin: "left" }}
+        />
+
+        {/* Coaching text */}
+        <motion.p
+          className="text-lg text-gray-600 dark:text-gray-300"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.5 }}
+        >
+          You need to level up your design career with coaching?{" "}
+          <a
+            href="https://adplist.org/mentors/charles-binet"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-black dark:text-white hover:underline transition-all duration-200"
+          >
+            Book me here
+          </a>
+        </motion.p>
+
+        {/* Advising text */}
+        <motion.p
+          className="text-lg text-gray-600 dark:text-gray-300 mt-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+        >
+          Your company needs advising?{" "}
+          <button
+            onClick={handleEmailClick}
+            onMouseEnter={handleEmailHover}
+            onMouseLeave={handleEmailLeave}
+            className="text-black dark:text-white hover:underline transition-all duration-200 cursor-pointer bg-transparent border-none p-0 relative"
+          >
+            {isEmailRevealed ? "charlesbinet@proton.me" : "Click here"}
+            {isEmailCopied && (
+              <div
+                className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                             bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                             px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+              >
+                Copied to clipboard!
+              </div>
+            )}
+          </button>
+        </motion.p>
+
+        {/* Chat text */}
+        <motion.p
+          className="text-lg text-gray-600 dark:text-gray-300 mt-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4, duration: 0.5 }}
+        >
+          Just want to chat?{" "}
+          <a
+            href="https://x.com/CharlesTenib"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-black dark:text-white hover:underline transition-all duration-200"
+          >
+            DM me here
+          </a>
+        </motion.p>
       </div>
     </main>
   );
