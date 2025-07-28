@@ -132,8 +132,11 @@ export default function Home() {
           >
             I build stuff.
           </motion.p>
-          <motion.div
-            className="w-12 h-12 rounded-xl shadow-lg sm:ml-4 relative"
+          <motion.a
+            href="https://www.minesquad.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-12 h-12 rounded-xl shadow-lg sm:ml-4 relative block"
             initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
             animate={{
               opacity: 1,
@@ -160,7 +163,7 @@ export default function Home() {
                 Minesquad - A giveback game
               </div>
             )}
-          </motion.div>
+          </motion.a>
         </motion.div>
 
         <motion.div
