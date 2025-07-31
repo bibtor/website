@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Linkedin, Dribbble, Github } from "lucide-react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -19,6 +19,26 @@ export default function Home() {
   const [isEmailRevealed, setIsEmailRevealed] = useState(false);
   const [isEmailCopied, setIsEmailCopied] = useState(false);
   const [isEmailHovered, setIsEmailHovered] = useState(false);
+
+  // Work assets cycling states
+  const [currentAssetIndex, setCurrentAssetIndex] = useState<{
+    [key: string]: number;
+  }>({
+    depict: 0,
+    validio: 0,
+    curb: 0,
+    zettle: 0,
+    daresay: 0,
+  });
+
+  // Work assets configuration
+  const workAssets = {
+    depict: ["depict01.png", "depict02.png", "depict03.png", "depict04.png"],
+    validio: ["validio01.png", "validio02.png", "validio03.png"],
+    curb: ["curb01.png", "curb02.png", "curb03.png"],
+    zettle: ["zettle01.png", "zettle02.png", "zettle03.png", "zettle04.png"],
+    daresay: ["daresay01.png", "daresay02.png", "daresay03.png"],
+  };
 
   const handleEmailClick = async () => {
     if (!isDesktop && !isEmailRevealed) {
@@ -49,6 +69,25 @@ export default function Home() {
       setIsEmailRevealed(false);
     }
   };
+
+  // Handle work assets cycling
+  useEffect(() => {
+    if (!hoveredIcon || !workAssets[hoveredIcon as keyof typeof workAssets])
+      return;
+
+    const interval = setInterval(() => {
+      setCurrentAssetIndex((prev) => {
+        const company = hoveredIcon as keyof typeof workAssets;
+        const assetCount = workAssets[company].length;
+        return {
+          ...prev,
+          [company]: (prev[company] + 1) % assetCount,
+        };
+      });
+    }, 800); // Change image every 0.8 seconds
+
+    return () => clearInterval(interval);
+  }, [hoveredIcon]);
 
   const iconVariants = {
     initial: {
@@ -219,6 +258,32 @@ export default function Home() {
                   Depict AI
                 </div>
               )}
+              {hoveredIcon === "depict" && workAssets.depict && (
+                <motion.div
+                  className="absolute top-full mt-2 pointer-events-none z-20 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px]"
+                  style={{
+                    left: 0,
+                    transform: "translateX(-100%)", // Align top-right of asset with bottom-left of icon
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Image
+                    src={`/${workAssets.depict[currentAssetIndex.depict]}`}
+                    alt="Depict work"
+                    width={320}
+                    height={320}
+                    className="rounded-xl shadow-lg w-full h-full"
+                    style={{
+                      objectFit: "contain",
+                      aspectRatio: "1/1",
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                </motion.div>
+              )}
             </motion.a>
 
             <motion.a
@@ -249,6 +314,32 @@ export default function Home() {
                 >
                   Validio
                 </div>
+              )}
+              {hoveredIcon === "validio" && workAssets.validio && (
+                <motion.div
+                  className="absolute top-full mt-2 pointer-events-none z-20 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px]"
+                  style={{
+                    left: 0,
+                    transform: "translateX(-100%)", // Align top-right of asset with bottom-left of icon
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Image
+                    src={`/${workAssets.validio[currentAssetIndex.validio]}`}
+                    alt="Validio work"
+                    width={320}
+                    height={320}
+                    className="rounded-xl shadow-lg w-full h-full"
+                    style={{
+                      objectFit: "contain",
+                      aspectRatio: "1/1",
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                </motion.div>
               )}
             </motion.a>
 
@@ -282,6 +373,32 @@ export default function Home() {
                   Curb Food
                 </div>
               )}
+              {hoveredIcon === "curb" && workAssets.curb && (
+                <motion.div
+                  className="absolute top-full mt-2 pointer-events-none z-20 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px]"
+                  style={{
+                    left: 0,
+                    transform: "translateX(-100%)", // Align top-right of asset with bottom-left of icon
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Image
+                    src={`/${workAssets.curb[currentAssetIndex.curb]}`}
+                    alt="Curb work"
+                    width={320}
+                    height={320}
+                    className="rounded-xl shadow-lg w-full h-full"
+                    style={{
+                      objectFit: "contain",
+                      aspectRatio: "1/1",
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                </motion.div>
+              )}
             </motion.a>
 
             <motion.a
@@ -312,6 +429,32 @@ export default function Home() {
                 >
                   Zettle by PayPal
                 </div>
+              )}
+              {hoveredIcon === "zettle" && workAssets.zettle && (
+                <motion.div
+                  className="absolute top-full mt-2 pointer-events-none z-20 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px]"
+                  style={{
+                    left: 0,
+                    transform: "translateX(-100%)", // Align top-right of asset with bottom-left of icon
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Image
+                    src={`/${workAssets.zettle[currentAssetIndex.zettle]}`}
+                    alt="Zettle work"
+                    width={320}
+                    height={320}
+                    className="rounded-xl shadow-lg w-full h-full"
+                    style={{
+                      objectFit: "contain",
+                      aspectRatio: "1/1",
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                </motion.div>
               )}
             </motion.a>
 
@@ -344,6 +487,32 @@ export default function Home() {
                 >
                   Daresay
                 </div>
+              )}
+              {hoveredIcon === "daresay" && workAssets.daresay && (
+                <motion.div
+                  className="absolute top-full mt-2 pointer-events-none z-20 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px]"
+                  style={{
+                    left: 0,
+                    transform: "translateX(-100%)", // Align top-right of asset with bottom-left of icon
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Image
+                    src={`/${workAssets.daresay[currentAssetIndex.daresay]}`}
+                    alt="Daresay work"
+                    width={320}
+                    height={320}
+                    className="rounded-xl shadow-lg w-full h-full"
+                    style={{
+                      objectFit: "contain",
+                      aspectRatio: "1/1",
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                </motion.div>
               )}
             </motion.a>
           </motion.div>
