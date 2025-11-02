@@ -10,6 +10,7 @@ export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const [isAvatarHovered, setIsAvatarHovered] = useState(false);
   const [isMinesquadHovered, setIsMinesquadHovered] = useState(false);
+  const [isWhalesNestHovered, setIsWhalesNestHovered] = useState(false);
   const [isWorkHovered, setIsWorkHovered] = useState(false);
 
   // Tooltip states for individual icons
@@ -159,9 +160,15 @@ export default function Home() {
         </motion.div>
 
         <motion.div
-          className="flex flex-col items-start gap-4 sm:flex-row sm:items-center mb-12"
-          onHoverStart={() => setIsMinesquadHovered(true)}
-          onHoverEnd={() => setIsMinesquadHovered(false)}
+          className="flex flex-col items-start gap-4 sm:flex-row sm:items-center mb-12 group"
+          onHoverStart={() => {
+            setIsMinesquadHovered(true);
+            setIsWhalesNestHovered(true);
+          }}
+          onHoverEnd={() => {
+            setIsMinesquadHovered(false);
+            setIsWhalesNestHovered(false);
+          }}
         >
           <motion.p
             className="text-lg text-gray-600 dark:text-gray-300"
@@ -171,38 +178,79 @@ export default function Home() {
           >
             I build stuff.
           </motion.p>
-          <motion.a
-            href="https://www.minesquad.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-12 h-12 rounded-xl shadow-lg sm:ml-4 relative block"
-            initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              rotate: isMinesquadHovered ? 0 : -3,
+
+          <motion.div
+            className="flex items-center"
+            variants={{
+              animate: {
+                transition: { staggerChildren: 0.1, delayChildren: 0.4 },
+              },
             }}
-            transition={{ duration: 0.1, ease: "easeInOut" }}
-            onHoverStart={() => setHoveredIcon("minesquad")}
-            onHoverEnd={() => setHoveredIcon(null)}
+            initial="initial"
+            animate="animate"
           >
-            <Image
-              src="/minesquad.png"
-              alt="Minesquad"
-              width={48}
-              height={48}
-              className="rounded-xl"
-            />
-            {hoveredIcon === "minesquad" && (
-              <div
-                className="absolute -top-10 left-1/2 transform -translate-x-1/2 
-                             bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
-                             px-2 py-1 rounded text-sm whitespace-nowrap z-10"
-              >
-                Minesquad - A giveback game
-              </div>
-            )}
-          </motion.a>
+            <motion.a
+              href="https://www.minesquad.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-xl shadow-lg transition-all duration-100 ease-out 
+                         mr-1 md:-mr-[3px] md:group-hover:mr-1 relative"
+              custom={{ rotate: -3 }}
+              variants={iconVariants}
+              transition={iconTransition}
+              animate={isMinesquadHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("minesquad")}
+              onHoverEnd={() => setHoveredIcon(null)}
+            >
+              <Image
+                src="/minesquad.png"
+                alt="Minesquad"
+                width={48}
+                height={48}
+                className="rounded-xl"
+              />
+              {hoveredIcon === "minesquad" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  Minesquad - A giveback game
+                </div>
+              )}
+            </motion.a>
+
+            <motion.a
+              href="https://www.whalesnest.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-xl shadow-lg transition-all duration-100 ease-out
+                         ml-1 md:-ml-[3px] md:group-hover:ml-1 relative"
+              custom={{ rotate: 2 }}
+              variants={iconVariants}
+              transition={iconTransition}
+              animate={isWhalesNestHovered ? "hover" : "animate"}
+              onHoverStart={() => setHoveredIcon("whalesnest")}
+              onHoverEnd={() => setHoveredIcon(null)}
+            >
+              <Image
+                src="/whalesnest.png"
+                alt="Whale's Nest"
+                width={48}
+                height={48}
+                className="rounded-xl"
+              />
+              {hoveredIcon === "whalesnest" && (
+                <div
+                  className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                               bg-dark-bg dark:bg-light-bg text-light-bg dark:text-dark-bg
+                               px-2 py-1 rounded text-sm whitespace-nowrap z-10"
+                >
+                  Whale's Nest - Investor tracking
+                </div>
+              )}
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -216,7 +264,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            I head(ed) product & design at
+            I headed product & design at
           </motion.p>
 
           <motion.div
